@@ -2,6 +2,7 @@ package com.arman.baking.ui.activity;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,7 +54,9 @@ public class MainActivity extends AppCompatActivity implements RecipeView,Recipe
     @Override
     public void onClickListener(Recipe recipe) {
         if(recipe !=null){
-            Toast.makeText(this, recipe.getName(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this,StepActivity.class);
+            intent.putExtra(StepActivity.KEY_RECIPE,recipe);
+            startActivity(intent);
         }
     }
 
