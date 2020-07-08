@@ -1,4 +1,4 @@
-package com.arman.baking.ui;
+package com.arman.baking.ui.activity;
 
 
 
@@ -7,9 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.arman.baking.R;
 import com.arman.baking.databinding.ActivityMainBinding;
 import com.arman.baking.model.Recipe;
+import com.arman.baking.ui.adapter.RecipeAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
