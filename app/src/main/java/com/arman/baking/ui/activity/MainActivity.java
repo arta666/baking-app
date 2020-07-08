@@ -11,16 +11,21 @@ import android.widget.Toast;
 import com.arman.baking.databinding.ActivityMainBinding;
 import com.arman.baking.listeners.RecipeItemListener;
 import com.arman.baking.model.Recipe;
+import com.arman.baking.presenter.MainActivityPresenter;
 import com.arman.baking.ui.adapter.RecipeAdapter;
+import com.arman.baking.view.RecipeView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
-public class MainActivity extends AppCompatActivity implements RecipeItemListener {
+
+public class MainActivity extends AppCompatActivity implements RecipeView,RecipeItemListener {
 
     private ActivityMainBinding mainBinding;
     private RecipeAdapter mAdapter;
+    private MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,12 @@ public class MainActivity extends AppCompatActivity implements RecipeItemListene
 
         initView();
 
-        addSample();
+        presenter = new MainActivityPresenter(this, AndroidSchedulers.mainThread());
+
+        presenter.fetchAllRecipes();
+
+
+
     }
 
     private void initView(){
@@ -45,22 +55,22 @@ public class MainActivity extends AppCompatActivity implements RecipeItemListene
 
     }
 
-    private void addSample(){
-        List<Recipe> recipeList = new ArrayList<>();
-
-        for (int i = 1; i < 10 ; i++) {
-            Recipe recipe = new Recipe();
-            recipe.setName("Food " + i);
-            recipeList.add(recipe);
-        }
-        mAdapter.setRecipeList(recipeList);
-
-    }
-
     @Override
     public void onClickListener(Recipe recipe) {
         if(recipe !=null){
             Toast.makeText(this, recipe.getName(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onDisplayRecipes(List<Recipe> recipeList) {
+        if(recipeList !=null){
+            mAdapter.setRecipeList(recipeList);
+        }
+    }
+
+    @Override
+    public void onFailure(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

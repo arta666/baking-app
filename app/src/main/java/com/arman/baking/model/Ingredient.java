@@ -5,7 +5,7 @@ import com.google.gson.annotations.Expose;
 public class Ingredient {
 
     @Expose
-    private int quantity;
+    private float quantity;
     @Expose
     private String measure;
     @Expose
@@ -15,7 +15,7 @@ public class Ingredient {
     public Ingredient() {
     }
 
-    public int getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 

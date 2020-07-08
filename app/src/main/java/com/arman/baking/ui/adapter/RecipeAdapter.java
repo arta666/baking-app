@@ -79,7 +79,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         private void binder(Recipe recipe) {
             if (recipe != null) {
                 itemBinding.tvName.setText(recipe.getName());
-                if (recipe.getImage() !=null){
+                if (recipe.getImage() != null && !recipe.getImage().equals("")){
                     Picasso.with(mContext)
                             .load(recipe.getImage())
                             .into(itemBinding.imageView);
