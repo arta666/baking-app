@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.arman.baking.databinding.ItemRecipeBinding;
 import com.arman.baking.listeners.RecipeItemListener;
 import com.arman.baking.model.Recipe;
+import com.arman.baking.util.ImageLoader;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -79,11 +80,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         private void binder(Recipe recipe) {
             if (recipe != null) {
                 itemBinding.tvName.setText(recipe.getName());
-                if (recipe.getImage() != null && !recipe.getImage().equals("")){
-                    Picasso.with(mContext)
-                            .load(recipe.getImage())
-                            .into(itemBinding.imageView);
-                }
+
+                ImageLoader.load(itemBinding.imageView,recipe.getImage());
             }
         }
 

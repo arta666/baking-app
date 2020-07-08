@@ -14,8 +14,6 @@ import com.arman.baking.model.Recipe;
 import com.arman.baking.presenter.MainActivityPresenter;
 import com.arman.baking.ui.adapter.RecipeAdapter;
 import com.arman.baking.view.RecipeView;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,7 +23,6 @@ public class MainActivity extends AppCompatActivity implements RecipeView,Recipe
 
     private ActivityMainBinding mainBinding;
     private RecipeAdapter mAdapter;
-    private MainActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +33,9 @@ public class MainActivity extends AppCompatActivity implements RecipeView,Recipe
 
         initView();
 
-        presenter = new MainActivityPresenter(this, AndroidSchedulers.mainThread());
+        MainActivityPresenter presenter = new MainActivityPresenter(this, AndroidSchedulers.mainThread());
 
         presenter.fetchAllRecipes();
-
-
 
     }
 
