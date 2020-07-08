@@ -89,6 +89,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         private void handleItemListener(int position){
             Recipe recipe = recipeList.get(position);
+            if(itemListener == null){
+                return;
+            }
             itemListener.onClickListener(recipe);
         }
     }

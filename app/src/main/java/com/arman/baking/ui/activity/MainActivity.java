@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.arman.baking.databinding.ActivityMainBinding;
+import com.arman.baking.listeners.RecipeItemListener;
 import com.arman.baking.model.Recipe;
 import com.arman.baking.ui.adapter.RecipeAdapter;
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RecipeItemListener {
 
     private ActivityMainBinding mainBinding;
     private RecipeAdapter mAdapter;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private void initView(){
 
         mAdapter = new RecipeAdapter(this);
-
+        mAdapter.setItemListener(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         mainBinding.recycler.setLayoutManager(layoutManager);
         mainBinding.recycler.setHasFixedSize(true);
@@ -53,5 +55,12 @@ public class MainActivity extends AppCompatActivity {
         }
         mAdapter.setRecipeList(recipeList);
 
+    }
+
+    @Override
+    public void onClickListener(Recipe recipe) {
+        if(recipe !=null){
+            Toast.makeText(this, recipe.getName(), Toast.LENGTH_SHORT).show();
+        }
     }
 }
