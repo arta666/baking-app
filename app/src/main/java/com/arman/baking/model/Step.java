@@ -1,9 +1,15 @@
 package com.arman.baking.model;
 
+import com.google.gson.annotations.Expose;
+
 public class Step {
+    @Expose
     private int id;
+    @Expose
     private String shortDescription;
+    @Expose
     private String videoURL;
+    @Expose
     private String thumbnailURL;
 
     public Step() {

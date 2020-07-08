@@ -1,8 +1,14 @@
 package com.arman.baking.model;
 
+import com.google.gson.annotations.Expose;
+
 public class Ingredient {
+
+    @Expose
     private int quantity;
+    @Expose
     private String measure;
+    @Expose
     private String ingredient;
 
 
