@@ -9,7 +9,7 @@ public class ImageLoader {
 
     public static void load(ImageView view,String url){
         if (url != null && !url.equals("")){
-            Picasso.with(view.getContext())
+            Picasso.get()
                     .load(url)
                     .into(view);
         }

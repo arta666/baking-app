@@ -2,16 +2,30 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.arman.baking">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".app.BakingApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.MainActivity"
+        <receiver android:name=".widget.AppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_info" />
+        </receiver>
+
+        <service android:name=".widget.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <activity
+            android:name=".ui.activity.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,8 +33,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.StepActivity"
-            android:parentActivityName=".ui.activity.MainActivity"/>
+        <activity
+            android:name=".ui.activity.StepListActivity"
+            android:label="Steps"
+            android:launchMode="singleTop"
+            android:parentActivityName=".ui.activity.MainActivity" />
+        <activity
+            android:name=".ui.activity.StepViewActivity"
+            android:parentActivityName=".ui.activity.StepListActivity" />
     </application>
 
 </manifest>

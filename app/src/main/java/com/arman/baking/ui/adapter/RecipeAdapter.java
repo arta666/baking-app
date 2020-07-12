@@ -11,7 +11,7 @@ import com.arman.baking.databinding.ItemRecipeBinding;
 import com.arman.baking.listeners.RecipeItemListener;
 import com.arman.baking.model.Recipe;
 import com.arman.baking.util.ImageLoader;
-import com.squareup.picasso.Picasso;
+
 
 import java.util.List;
 

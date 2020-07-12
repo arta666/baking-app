@@ -1,136 +1,100 @@
 package com.arman.baking.ui.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.arman.baking.R;
-import com.arman.baking.databinding.FragmentStepViewBinding;
-import com.arman.baking.databinding.StepItemBinding;
-import com.arman.baking.model.Recipe;
+import com.arman.baking.databinding.IngredientsCardViewBinding;
 
-import moe.feng.common.stepperview.IStepperAdapter;
-import moe.feng.common.stepperview.VerticalStepperItemView;
+import com.arman.baking.databinding.ItemStepBinding;
 
-public class StepsAdapter implements IStepperAdapter, View.OnClickListener {
+import com.arman.baking.model.Ingredient;
+import com.arman.baking.model.Step;
 
-    private static final String TAG = StepsAdapter.class.getSimpleName();
+import java.util.List;
+
+public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHolder> {
 
     private Context mContext;
 
-    private Recipe recipe;
+    private List<Step> stepList;
 
-    private StepperClickListener listener;
+    private static final int HEADER = 0;
 
-    private int currentPosition;
+    private static final int ITEMS = 1;
 
-
-    public interface StepperClickListener {
-        void onNextClick(int position);
-        void onBackClick(int position);
-    }
-
-    public StepsAdapter(Context mContext, Recipe recipe) {
+    public StepsAdapter(Context mContext) {
         this.mContext = mContext;
-        this.recipe = recipe;
     }
 
-    public void setListener(StepperClickListener listener) {
-        this.listener = listener;
-    }
 
     @NonNull
     @Override
-    public CharSequence getTitle(int position) {
-        if (position == 0){
-            return "Welcome";
-        }else{
-            if(position != size() -1){
-                return recipe.getSteps().get(position -1).getShortDescription();
-            }else {
-                return "Last Step";
+    public StepsViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        ItemStepBinding itemBinding = ItemStepBinding.inflate(LayoutInflater.from(viewGroup.getContext()), viewGroup, false);
+        return new StepsViewHolder(itemBinding);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull StepsViewHolder holder, int position) {
+       holder.binder(getItem(position));
+    }
+
+
+    @Override
+    public int getItemCount() {
+        if (stepList == null) {
+            return 0;
+        }
+        return stepList.size();
+    }
+
+    public Step getItem(int position) {
+        return stepList.get(position);
+    }
+
+    public void setStepList(List<Step> stepList) {
+        this.stepList = stepList;
+        notifyDataSetChanged();
+    }
+
+
+    class StepsViewHolder extends RecyclerView.ViewHolder {
+
+        ItemStepBinding itemBinding;
+
+        public StepsViewHolder(@NonNull ItemStepBinding itemBinding) {
+            super(itemBinding.getRoot());
+            this.itemBinding = itemBinding;
+        }
+
+
+        private void binder(Step step) {
+            if (step != null) {
+                itemBinding.frameLayout.setBackground(getFrameDrawable(step));
+                itemBinding.stepNumber.setText(String.valueOf(step.getId()));
+                itemBinding.stepTitle.setText(step.getShortDescription());
             }
         }
-    }
 
-    @Nullable
-    @Override
-    public CharSequence getSummary(int position) {
-        if (position == 0){
-            return "Welcome to Summury";
-        }else{
-            if(position != size() -1){
-                return recipe.getSteps().get(position -1).getShortDescription();
-            }else {
-                return "Last Summury";
+        private Drawable getFrameDrawable(Step step) {
+            if (isFirstStep(step)) {
+                return ContextCompat.getDrawable(mContext, R.drawable.buble_yellow);
             }
+            return ContextCompat.getDrawable(mContext, R.drawable.buble_view);
         }
-    }
 
-    @Override
-    public int size() {
-        if (recipe == null) return 0;
-        return (recipe.getSteps().size() + 2);
-    }
-
-    @Override
-    public View onCreateCustomView(int position, Context context, VerticalStepperItemView parent) {
-
-        LayoutInflater inflater = LayoutInflater.from(context);
-
-        StepItemBinding binding = StepItemBinding.inflate(inflater,parent,false);
-
-        View view = binding.getRoot();
-
-        this.currentPosition = position;
-
-        binding.btBack.setOnClickListener(this);
-
-        binding.btGo.setOnClickListener(this);
-
-        return view;
-    }
-
-    @Override
-    public void onShow(int i) {
-
-    }
-
-    @Override
-    public void onHide(int i) {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-        int viewId = v.getId();
-
-        switch (viewId){
-            case R.id.btGo:
-                handleNextButton(currentPosition);
-                break;
-            case R.id.btBack:
-                handleBackButton(currentPosition);
-                break;
+        private boolean isFirstStep(Step step){
+            return step.getId() == 0;
         }
-    }
 
-    private void handleNextButton(int position){
-        if(listener == null){
-            Log.i(TAG, "please set listener !");
-            return;
-        }
-        listener.onNextClick(position);
-    }
-
-    private void handleBackButton(int position){
-        if(listener == null){
-            Log.i(TAG, "please set listener !");
-            return;
-        }
-        listener.onBackClick(position);
     }
 }

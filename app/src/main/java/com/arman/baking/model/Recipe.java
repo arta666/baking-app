@@ -1,5 +1,7 @@
 package com.arman.baking.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -7,9 +9,11 @@ import com.google.gson.annotations.Expose;
 
 import java.util.List;
 
+@Entity(tableName = "recipe")
 public class Recipe implements Parcelable {
 
     @Expose
+    @PrimaryKey
     private int id;
     @Expose
     private String name;
@@ -87,5 +91,25 @@ public class Recipe implements Parcelable {
         dest.writeTypedList(steps);
         dest.writeInt(serving);
         dest.writeString(image);
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setSteps(List<Step> steps) {
+        this.steps = steps;
+    }
+
+    public void setServing(int serving) {
+        this.serving = serving;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

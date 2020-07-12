@@ -1,3 +1,25 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Baking</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="recipe_details_ingredient_line" translatable="false">
+    <xliff:g id="bullet">\u2022</xliff:g> <xliff:g id="name">%s</xliff:g>
+    (<xliff:g id="quantity">%s</xliff:g> <xliff:g id="measure">%s</xliff:g>)
+  </string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+
+    <string name="format_ingredient" formatted="false">%.1f / %s</string>
+    <string name="msg_title_ingredients">Ingredients</string>
+    <string name="msg_widget_sent">Ingredient Sent to Widget</string>
+    <string name="video_placeholder_content">placeholder</string>
+    <string name="title_description">Description</string>
+    <string name="title_ingredients">Ingredients</string>
+    <string name="title_quantity">Quantity</string>
+    <string name="title_measure">Measure</string>
+    <string name="placeholder_recipe_image">Recipe Image</string>
+    <string name="placeholder_next">Next</string>
+    <string name="title_indroduction">Introduction</string>
+    <string name="fomat_step_title">Step %d</string>
 </resources>
