@@ -6,6 +6,17 @@ This app get recipe data from network and store in your local storage, and we ca
 With each of these recipes you can make delicious things (Cheesecake).This app support big screen like tablet 
 and you can also send the ingredients of your favorite recipes to your home screen widget to be easily accessible to you
 
+
+## Ingredients
+
+- [View Binding](https://developer.android.com/topic/libraries/view-binding)
+- [Architecture Components (View Models)](https://developer.android.com/topic/libraries/architecture)
+- [Exo Player](https://github.com/google/ExoPlayer)
+- [Retrofit (Networking Library)](https://square.github.io/retrofit/)
+- [Picasso (image downloading and caching)](https://square.github.io/picasso/)
+- Home Screen Widgets
+- Testing (JUnit 4 and Espresso Testing)
+
 ## Screenshots
 
 <div>
