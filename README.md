@@ -2,9 +2,7 @@
 
 ![alt text](./app/src/main/res/mipmap-xxxhdpi/ic_launcher.png "Logo")
 
-This app get recipe data from network and store in your local storage, and we can see detaile of recipe by clickng on it.
-With each of these recipes you can make delicious things (Cheesecake).This app support big screen like tablet 
-and you can also send the ingredients of your favorite recipes to your home screen widget to be easily accessible to you
+This app gets recipe data from network and stores it in your local storage, and you can see the detail of the recipe by clicking on it. With each of these recipes you can make delicious things such as (Cheesecake).This app support big screens like tablets and you can also send the ingredients of your favorite recipes to your home screen widget to be easily accessible to you
 
 
 ## Ingredients
